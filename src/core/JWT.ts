@@ -1,7 +1,7 @@
 import path from 'path';
 import { readFile } from 'fs';
 import { promisify } from 'util';
-import {sign, verify} from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
 import { InternalError, BadTokenError, TokenExpiredError } from './ApiError';
 
 /*
