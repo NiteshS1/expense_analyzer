@@ -1,4 +1,8 @@
-import express, { type NextFunction, type Request, type Response } from 'express';
+import express, {
+  type NextFunction,
+  type Request,
+  type Response,
+} from 'express';
 import routes from './routers';
 import { NotFoundError, ApiError } from './core/ApiError';
 import cors from 'cors';
@@ -10,10 +14,10 @@ app.use(express.json());
 
 void connectDB();
 
-app.use(cors(({ origin: '*', optionsSuccessStatus: 200 })));
+app.use(cors({ origin: '*', optionsSuccessStatus: 200 }));
 
 app.get('/health', (req, res) => {
-    res.status(200).send('Bun server working fine');
+  res.status(200).send('Node server working fine');
 });
 
 app.use('/', routes);
@@ -21,14 +25,14 @@ app.use('/', routes);
 app.use((req, res, next) => next(new NotFoundError()));
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    if (err instanceof ApiError) {
-        return ApiError.handle(err, res);
-    }
-    console.error(err);
-    return res.status(500).json({
-        statusCode: 500,
-        message: 'Internal Server Error'
-    });
+  if (err instanceof ApiError) {
+    return ApiError.handle(err, res);
+  }
+  console.error(err);
+  return res.status(500).json({
+    statusCode: 500,
+    message: 'Internal Server Error',
+  });
 });
 
 export default app;
