@@ -1,7 +1,11 @@
 export class User {
     id!: string;
-    full_name!: string;
+    first_name!: string;
+    last_name!: string;
     email!: string;
+    password!: string;
+    createdAt!: Date;
+    updatedAt!: Date;
 
     constructor(data: Partial<User>) {
         Object.assign(this, data);
@@ -10,8 +14,12 @@ export class User {
     toJSON () {
         return {
             id: this.id,
-            full_name: this.full_name,
+            first_name: this.first_name,
+            last_name: this.last_name,
             email: this.email,
+            password: this.password,
+            createdAt: this.createdAt,
+            updatedAt: this.updatedAt,
         };
     }
 }

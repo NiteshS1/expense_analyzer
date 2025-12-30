@@ -1,5 +1,7 @@
 export class Auth {
     id!: string;
+    user_id!: string;
+    token!: string;
     createdAt!: Date;
     updatedAt!: Date;
 
@@ -10,6 +12,8 @@ export class Auth {
     toJSON () {
         return {
             id: this.id,
+            user_id: this.user_id,
+            token: this.token,
             createdAt: this.createdAt,
             updatedAt: this.updatedAt,
         };
