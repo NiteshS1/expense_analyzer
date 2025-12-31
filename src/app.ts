@@ -7,6 +7,8 @@ import routes from './routers';
 import { NotFoundError, ApiError } from './core/ApiError';
 import cors from 'cors';
 import connectDB from './database/db';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './config/swagger';
 
 const app = express();
 
@@ -19,6 +21,9 @@ app.use(cors({ origin: '*', optionsSuccessStatus: 200 }));
 app.get('/health', (req, res) => {
   res.status(200).send('Node server working fine');
 });
+
+// Swagger documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/', routes);
 
