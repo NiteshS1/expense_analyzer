@@ -12,4 +12,4 @@ To run:
 npm run dev
 ```
 
-This project was created using `npm init` in npm.
+This project was created using `npm init` in node.
