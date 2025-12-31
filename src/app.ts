@@ -16,7 +16,12 @@ app.use(express.json());
 
 void connectDB();
 
-app.use(cors({ origin: '*', optionsSuccessStatus: 200 }));
+app.use(
+  cors({
+    origin: 'https://expense-analyzer-1xod.onrender.com',
+    optionsSuccessStatus: 200,
+  }),
+);
 
 app.get('/health', (req, res) => {
   res.status(200).send('Node server working fine');
