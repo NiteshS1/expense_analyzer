@@ -9,4 +9,5 @@ export interface IAuthService {
   deleteUser(id: string): Promise<boolean>;
   userMe(token: string): Promise<User>;
   generateToken(user: User): Promise<string>;
+  validateToken(token: string): Promise<{ valid: boolean; id: string | null }>;
 }

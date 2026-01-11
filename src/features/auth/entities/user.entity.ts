@@ -16,17 +16,3 @@ export class User {
     return userWithoutPassword;
   }
 }
-
-// first name
-// last name
-// email
-// password
-
-// Transaction
-
-// id
-// user_id
-// money
-// cate
-// type - depo / withdraw
-// creared_at

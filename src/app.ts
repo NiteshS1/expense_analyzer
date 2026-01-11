@@ -3,7 +3,7 @@ import express, {
   type Request,
   type Response,
 } from 'express';
-import routes from './routers';
+import routes from './routes';
 import { NotFoundError, ApiError } from './core/ApiError';
 import cors from 'cors';
 import connectDB from './database/db';
@@ -17,7 +17,7 @@ app.use(express.json());
 void connectDB();
 
 const corsOptions = {
-  origin: 'https://expense-analyzer-1xod.onrender.com',
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };

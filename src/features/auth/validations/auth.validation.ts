@@ -1,6 +1,5 @@
 import Joi from 'joi';
 import { JoiAuthBearer, JoiObjectId } from '../../../helpers/validator';
-import { User } from '../entities/user.entity';
 
 export class AuthValidation {
   static id = Joi.object({

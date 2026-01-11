@@ -1,4 +1,3 @@
-import { Agent } from 'node:http';
 import { BadRequestError, NotFoundError } from '../../../core/ApiError';
 import JWT from '../../../core/JWT';
 import { CreateUserDTO, LoginUserDTO } from '../dtos/user.dto';
