@@ -14,7 +14,8 @@ const options: swaggerJsdoc.Options = {
     },
     servers: [
       {
-        url: `http://localhost:${Config.PORT || 4000}`,
+        url: `https://expense-analyzer-1xod.onrender.com:${Config.PORT || 4000}`,
+        // url: `http://localhost:${Config.PORT || 4000}`,
         description: 'Development server',
       },
     ],
