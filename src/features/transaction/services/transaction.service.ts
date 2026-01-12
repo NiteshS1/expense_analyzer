@@ -10,7 +10,6 @@ import { SavingGoal } from '../entities/savingGoal.entity';
 import { Transaction } from '../entities/transaction.entity';
 import { ITransactionRepository } from '../interfaces/i-transaction.repository';
 import { ITransactionService } from '../interfaces/i-transaction.service';
-import { TransactionMapper } from '../mappers/transaction.mapper';
 import { TransactionRepository } from '../repositories/transaction.repository';
 
 export class TransactionService implements ITransactionService {

@@ -163,6 +163,128 @@ const options: swaggerJsdoc.Options = {
             },
           },
         },
+        Transaction: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'string',
+              description: 'Transaction ID',
+            },
+            user_id: {
+              type: 'string',
+              description: 'User ID who created the transaction',
+            },
+            amount: {
+              type: 'number',
+              description: 'Transaction amount',
+              example: 100.5,
+            },
+            type: {
+              type: 'string',
+              description: 'Transaction type',
+              enum: ['deposit', 'withdrawal'],
+              example: 'deposit',
+            },
+            category: {
+              type: 'string',
+              description: 'Transaction category',
+              enum: [
+                'Food',
+                'Transport',
+                'Rent',
+                'Shopping',
+                'Other',
+                'Income',
+              ],
+              example: 'Food',
+            },
+            createdAt: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Creation timestamp',
+            },
+          },
+        },
+        CreateTransactionRequest: {
+          type: 'object',
+          required: ['amount', 'type', 'category'],
+          properties: {
+            amount: {
+              type: 'number',
+              description: 'Transaction amount',
+              example: 100.5,
+            },
+            type: {
+              type: 'string',
+              description: 'Transaction type',
+              enum: ['deposit', 'withdrawal'],
+              example: 'deposit',
+            },
+            category: {
+              type: 'string',
+              description: 'Transaction category',
+              enum: [
+                'Food',
+                'Transport',
+                'Rent',
+                'Shopping',
+                'Other',
+                'Income',
+              ],
+              example: 'Food',
+            },
+          },
+        },
+        SavingGoal: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'string',
+              description: 'Saving goal ID',
+            },
+            user_id: {
+              type: 'string',
+              description: 'User ID who created the saving goal',
+            },
+            target_amount: {
+              type: 'number',
+              description: 'Target amount to save',
+              example: 5000,
+            },
+            createdAt: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Creation timestamp',
+            },
+            updatedAt: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Last update timestamp',
+            },
+          },
+        },
+        CreateSavingGoalRequest: {
+          type: 'object',
+          required: ['target_amount'],
+          properties: {
+            target_amount: {
+              type: 'number',
+              description: 'Target amount to save',
+              example: 5000,
+            },
+          },
+        },
+        UpdateSavingGoalRequest: {
+          type: 'object',
+          required: ['target_amount'],
+          properties: {
+            target_amount: {
+              type: 'number',
+              description: 'Updated target amount to save',
+              example: 7500,
+            },
+          },
+        },
       },
     },
   },

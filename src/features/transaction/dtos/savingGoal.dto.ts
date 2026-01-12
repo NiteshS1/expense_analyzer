@@ -21,7 +21,6 @@ export class CreateSavingGoalDTO implements Partial<SavingGoal> {
 }
 
 export class UpdateSavingGoalDTO implements Partial<SavingGoal> {
-  id!: string;
   target_amount!: number;
 
   constructor(data: Partial<UpdateSavingGoalDTO>) {
@@ -29,9 +28,6 @@ export class UpdateSavingGoalDTO implements Partial<SavingGoal> {
   }
 
   validate() {
-    if (!this.id) {
-      throw new BadRequestError('ID is required');
-    }
     if (!this.target_amount) {
       throw new BadRequestError('Target amount is required');
     }

@@ -7,6 +7,10 @@ import { ITransactionService } from '../interfaces/i-transaction.service';
 import { TransactionService } from '../services/transaction.service';
 import { TransactionValidation } from '../validations/transaction.validation';
 import { BadRequestError } from '../../../core/ApiError';
+import {
+  CreateSavingGoalDTO,
+  UpdateSavingGoalDTO,
+} from '../dtos/savingGoal.dto';
 
 export class TransactionController {
   private service: ITransactionService;
@@ -85,6 +89,47 @@ export class TransactionController {
       new SuccessResponse('Transactions fetched successfully', result).send(
         res,
       );
+    }),
+  ];
+
+  createSavingGoal = [
+    validator(TransactionValidation.auth, ValidationSource.HEADER),
+    asyncHandler(async (req: Request, res: Response) => {
+      const token = req.headers.authorization?.split(' ')[1];
+      if (!token) {
+        throw new BadRequestError('Token is required');
+      }
+      const data = new CreateSavingGoalDTO(req.body);
+      const result = await this.service.createSavingGoal(token, data);
+      new SuccessResponse('Saving Goal created successfully', result).send(res);
+    }),
+  ];
+
+  getSavingGoalByUserId = [
+    validator(TransactionValidation.auth, ValidationSource.HEADER),
+    asyncHandler(async (req: Request, res: Response) => {
+      const token = req.headers.authorization?.split(' ')[1];
+      if (!token) {
+        throw new BadRequestError('Token is required');
+      }
+      const result = await this.service.getSavingGoalByUserId(token);
+      new SuccessResponse('Saving Goal fetched successfully', result).send(res);
+    }),
+  ];
+
+  updateSavingGoal = [
+    validator(TransactionValidation.auth, ValidationSource.HEADER),
+    validator(TransactionValidation.id, ValidationSource.PARAM),
+    asyncHandler(async (req: Request, res: Response) => {
+      const token = req.headers.authorization?.split(' ')[1];
+      if (!token) {
+        throw new BadRequestError('Token is required');
+      }
+      const id = req.params.id as string;
+      const data = new UpdateSavingGoalDTO(req.body);
+      data.validate();
+      const result = await this.service.updateSavingGoal(id, data);
+      new SuccessResponse('Saving Goal updated successfully', result).send(res);
     }),
   ];
 }
