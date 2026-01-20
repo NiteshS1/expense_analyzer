@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { Config } from '../config';
 
+dotenv.config();
+
 const dbURI = Config.MONGO_URI;
 
 const options = {
@@ -9,8 +11,6 @@ const options = {
   connectTimeoutMS: 60000,
   socketTimeoutMS: 45000,
 };
-
-dotenv.config();
 
 if (!dbURI) {
   throw new Error('MONGO_URI is not defined in environment variables');
