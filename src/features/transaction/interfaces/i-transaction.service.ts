@@ -1,19 +1,46 @@
 import {
+  CreateSavingCategoryGoalDTO,
+  UpdateSavingCategoryGoalDTO,
+} from '../dtos/savingCategoryGoal.dto';
+import {
   CreateSavingGoalDTO,
   UpdateSavingGoalDTO,
 } from '../dtos/savingGoal.dto';
 import { CreateTransactionDTO } from '../dtos/transaction.dto';
+import { SavingCategoryGoal } from '../entities/savingCategoryGoal.entity';
 import { SavingGoal } from '../entities/savingGoal.entity';
-import { Transaction } from '../entities/transaction.entity';
-import { CategoryTotal } from '../types/types';
+import { Transaction, TransactionType } from '../entities/transaction.entity';
+import {
+  AnalyticsResponse,
+  CategoryTotal,
+  PaginationMeta,
+  PeriodFilter,
+} from '../types/types';
 
 export interface ITransactionService {
   createTransaction(
     token: string,
     data: Partial<CreateTransactionDTO>,
   ): Promise<Transaction>;
-  getAllTransactions(): Promise<Transaction[]>;
-  getTransactionsByUserId(token: string): Promise<Transaction[]>;
+  getAllTransactions(
+    page?: number,
+    limit?: number,
+    period?: PeriodFilter,
+    date?: Date,
+  ): Promise<{
+    transactions: Transaction[];
+    pagination: PaginationMeta;
+  }>;
+  getTransactionsByUserId(
+    token: string,
+    page?: number,
+    limit?: number,
+    period?: PeriodFilter,
+    date?: Date,
+  ): Promise<{
+    transactions: Transaction[];
+    pagination: PaginationMeta;
+  }>;
   getRecentTransactions(limit: number, token: string): Promise<Transaction[]>;
   getTransactionsByCategory(
     category: string,
@@ -22,6 +49,27 @@ export interface ITransactionService {
   getTransactionsByCategoryWithTotalAmount(
     token: string,
   ): Promise<CategoryTotal[]>;
+  getTransactionsByType(
+    token: string,
+    type: TransactionType,
+    page?: number,
+    limit?: number,
+    period?: PeriodFilter,
+    date?: Date,
+  ): Promise<{
+    transactions: Transaction[];
+    pagination: PaginationMeta;
+  }>;
+
+  createSavingCategoryGoal(
+    token: string,
+    data: Partial<CreateSavingCategoryGoalDTO>,
+  ): Promise<SavingCategoryGoal>;
+  getSavingCategoryGoalByUserId(token: string): Promise<SavingCategoryGoal[]>;
+  updateSavingCategoryGoal(
+    id: string,
+    data: UpdateSavingCategoryGoalDTO,
+  ): Promise<SavingCategoryGoal | null>;
 
   createSavingGoal(
     token: string,
@@ -32,4 +80,9 @@ export interface ITransactionService {
     id: string,
     data: UpdateSavingGoalDTO,
   ): Promise<SavingGoal | null>;
+  getTransactionAnalytics(
+    token: string,
+    period: PeriodFilter,
+    date?: Date,
+  ): Promise<AnalyticsResponse>;
 }

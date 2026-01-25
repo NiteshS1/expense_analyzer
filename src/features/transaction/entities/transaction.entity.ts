@@ -1,15 +1,14 @@
-export interface TransactionType {
-  DEPOSIT: 'deposit';
-  WITHDRAWAL: 'withdrawal';
+export enum TransactionType {
+  DEPOSIT = 'deposit',
+  WITHDRAWAL = 'withdrawal',
 }
 
 export interface TransactionCategory {
-  FOOD: 'withdrawal';
+  FOOD: 'Food';
   TRANSPORT: 'Transport';
   RENT: 'Rent';
   SHOPPING: 'Shopping';
   OTHER: 'Other';
-  INCOME: 'Income';
 }
 
 export class Transaction {
@@ -18,7 +17,6 @@ export class Transaction {
   amount!: number;
   type!: TransactionType;
   category!: TransactionCategory;
-  // note?: string;
   createdAt!: Date;
 
   constructor(data: Partial<Transaction>) {
@@ -32,7 +30,6 @@ export class Transaction {
       amount: this.amount,
       type: this.type,
       category: this.category,
-      // note: this.note,
       createdAt: this.createdAt,
     };
   }

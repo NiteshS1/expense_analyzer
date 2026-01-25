@@ -9,8 +9,16 @@ import cors from 'cors';
 import connectDB from './database/db';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './config/swagger';
+import client from 'prom-client';
 
 const app = express();
+
+const collectDefaultMetrics = client.collectDefaultMetrics;
+
+const Registry = client.Registry;
+const register = new Registry();
+
+collectDefaultMetrics({ register: register });
 
 app.use(express.json());
 
@@ -32,6 +40,12 @@ app.get('/health', (req, res) => {
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/', routes);
+
+app.get('/metrics', async (req, res) => {
+  res.setHeader('Content-Type', register.contentType);
+  const metrics = await register.metrics();
+  res.send(metrics);
+});
 
 app.use((req, res, next) => next(new NotFoundError()));
 
