@@ -14,6 +14,10 @@ const TransactionSchema = new Schema<ITransactionDocument>(
       type: String,
       required: true,
     },
+    title: {
+      type: String,
+      require: true,
+    },
     amount: {
       type: Number,
       required: true,

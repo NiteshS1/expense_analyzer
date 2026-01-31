@@ -34,10 +34,6 @@ export interface ITransactionRepository {
     totalItems: number;
   }>;
   getRecentTransactions(limit: number, userId: string): Promise<Transaction[]>;
-  getTransactionsByCategory(
-    category: string,
-    userId: string,
-  ): Promise<Transaction[]>;
   getTransactionsByType(
     userId: string,
     type: TransactionType,

@@ -119,27 +119,6 @@ export class TransactionController {
     }),
   ];
 
-  getTransactionsByCategory = [
-    validator(TransactionValidation.auth, ValidationSource.HEADER),
-    asyncHandler(async (req: Request, res: Response) => {
-      const token = req.headers.authorization?.split(' ')[1];
-      if (!token) {
-        throw new BadRequestError('Token is required');
-      }
-      const category = req.params.category as string;
-      if (!category) {
-        throw new BadRequestError('Category is required');
-      }
-      const result = await this.service.getTransactionsByCategory(
-        category,
-        token,
-      );
-      new SuccessResponse('Transactions fetched successfully', result).send(
-        res,
-      );
-    }),
-  ];
-
   getTransactionsByCategoryWithTotalAmount = [
     validator(TransactionValidation.auth, ValidationSource.HEADER),
     asyncHandler(async (req: Request, res: Response) => {

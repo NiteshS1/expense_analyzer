@@ -228,53 +228,6 @@ router.get('/recent', controller.getRecentTransactions);
 
 /**
  * @swagger
- * /v1/transaction/category/{category}:
- *   get:
- *     summary: Get transactions by category
- *     tags: [Transactions]
- *     security:
- *       - BearerAuth: []
- *     description: Retrieves transactions filtered by category for the authenticated user
- *     parameters:
- *       - in: path
- *         name: category
- *         required: true
- *         schema:
- *           type: string
- *           enum: [Food, Transport, Rent, Shopping, Other, Income]
- *         description: Category to filter transactions
- *         example: Food
- *     responses:
- *       200:
- *         description: Transactions fetched successfully
- *         content:
- *           application/json:
- *             schema:
- *               allOf:
- *                 - $ref: '#/components/schemas/SuccessResponse'
- *                 - type: object
- *                   properties:
- *                     data:
- *                       type: array
- *                       items:
- *                         $ref: '#/components/schemas/Transaction'
- *       400:
- *         description: Bad request - Category is required
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
- *       401:
- *         description: Unauthorized - Token missing or invalid
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
- */
-router.get('/category/:category', controller.getTransactionsByCategory);
-
-/**
- * @swagger
  * /v1/transaction/total-amounts-by-category:
  *   get:
  *     summary: Get total amounts by category

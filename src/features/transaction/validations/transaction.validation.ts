@@ -23,7 +23,10 @@ export class TransactionValidation {
       'number.min': 'Amount must be greater than 0',
       'any.required': 'Amount is required',
     }),
-    type: Joi.string().required(),
+    type: Joi.string().valid('deposit', 'withdrawal').required().messages({
+      'any.only': 'Type must be either "deposit" or "withdrawal"',
+      'any.required': 'Type is required',
+    }),
     category: Joi.string().required(),
   });
 

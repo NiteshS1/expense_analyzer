@@ -10,6 +10,7 @@ export class TransactionMapper {
     return new Transaction({
       id: doc._id.toString(),
       user_id: doc.user_id,
+      title: doc.title,
       amount: doc.amount,
       type: doc.type as TransactionType,
       category: doc.category as TransactionCategory,

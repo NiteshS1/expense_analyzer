@@ -10,6 +10,7 @@ import connectDB from './database/db';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './config/swagger';
 import client from 'prom-client';
+import responseTime from 'response-time';
 
 const app = express();
 
@@ -19,6 +20,31 @@ const Registry = client.Registry;
 const register = new Registry();
 
 collectDefaultMetrics({ register: register });
+
+const reqResTime = new client.Histogram({
+  name: 'http_express_req_res_time',
+  help: 'This tell how much time is taken by req and res',
+  labelNames: ['method', 'route', 'status_code'],
+  buckets: [1, 50, 100, 200, 400, 500, 800, 1000, 2000],
+});
+
+const totalReqCount = new client.Counter({
+  name: 'total_req',
+  help: 'Tells total req',
+});
+
+app.use(
+  responseTime((req, res, time) => {
+    totalReqCount.inc();
+    reqResTime
+      .labels({
+        method: req.method,
+        route: req.url,
+        status_code: res.statusCode,
+      })
+      .observe(time);
+  }),
+);
 
 app.use(express.json());
 

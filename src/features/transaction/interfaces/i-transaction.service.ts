@@ -42,10 +42,6 @@ export interface ITransactionService {
     pagination: PaginationMeta;
   }>;
   getRecentTransactions(limit: number, token: string): Promise<Transaction[]>;
-  getTransactionsByCategory(
-    category: string,
-    token: string,
-  ): Promise<{ transactions: Transaction[]; totalAmount: number }>;
   getTransactionsByCategoryWithTotalAmount(
     token: string,
   ): Promise<CategoryTotal[]>;

@@ -14,6 +14,7 @@ export interface TransactionCategory {
 export class Transaction {
   id!: string;
   user_id!: string;
+  title!: string;
   amount!: number;
   type!: TransactionType;
   category!: TransactionCategory;
@@ -27,6 +28,7 @@ export class Transaction {
     return {
       id: this.id,
       user_id: this.user_id,
+      title: this.title,
       amount: this.amount,
       type: this.type,
       category: this.category,

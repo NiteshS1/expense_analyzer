@@ -157,18 +157,6 @@ export class TransactionRepository implements ITransactionRepository {
     return TransactionMapper.toEntities(transactions);
   }
 
-  async getTransactionsByCategory(
-    category: string,
-    userId: string,
-  ): Promise<Transaction[]> {
-    const transactions = await TransactionModel.find({
-      user_id: userId,
-      category: category as unknown as TransactionCategory,
-    });
-
-    return TransactionMapper.toEntities(transactions);
-  }
-
   async getTransactionsByType(
     userId: string,
     type: TransactionType,

@@ -125,28 +125,6 @@ export class TransactionService implements ITransactionService {
     return transactions;
   }
 
-  async getTransactionsByCategory(
-    category: string,
-    token: string,
-  ): Promise<{ transactions: Transaction[]; totalAmount: number }> {
-    const { valid, id } = await this.authService.validateToken(token);
-    if (!valid) {
-      throw new NotFoundError('User not found');
-    }
-    const transactions = await this.repository.getTransactionsByCategory(
-      category,
-      id || '',
-    );
-    if (transactions.length === 0) {
-      throw new NotFoundError('Transactions not found');
-    }
-    let totalAmount = 0;
-    for (const transaction of transactions) {
-      totalAmount += transaction.amount;
-    }
-    return { transactions, totalAmount };
-  }
-
   async getTransactionsByCategoryWithTotalAmount(
     token: string,
   ): Promise<CategoryTotal[]> {

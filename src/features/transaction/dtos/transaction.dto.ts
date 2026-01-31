@@ -8,6 +8,7 @@ import {
 export class CreateTransactionDTO implements Partial<Transaction> {
   id!: string;
   user_id!: string;
+  title!: string;
   amount!: number;
   type!: TransactionType;
   category!: TransactionCategory;
@@ -20,11 +21,22 @@ export class CreateTransactionDTO implements Partial<Transaction> {
     if (!this.user_id) {
       throw new BadRequestError('User ID is required');
     }
+    if (!this.title) {
+      throw new BadRequestError('Title is required');
+    }
     if (!this.amount) {
       throw new BadRequestError('Amount is required');
     }
     if (!this.type) {
       throw new BadRequestError('Type is required');
+    }
+    if (
+      this.type !== TransactionType.DEPOSIT &&
+      this.type !== TransactionType.WITHDRAWAL
+    ) {
+      throw new BadRequestError(
+        'Type must be either "deposit" or "withdrawal"',
+      );
     }
     if (!this.category) {
       throw new BadRequestError('Category is required');
